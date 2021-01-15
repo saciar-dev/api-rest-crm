@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-mongoose.connect("mongodb+srv://root:R55Gt9Bf@cluster0.oyjje.mongodb.net/userdb?retryWrites=true&w=majority", {
+dotenv.config();
+
+if(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify:true,

@@ -1,8 +1,12 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export default {
     database: {
-        host: 'crm.congressrental.com',
-        user: 'root',
-        password: 'R55Gt9Bf',
-        database: 'crm'
+        host: process.env.HOST_MYSQL,
+        user: process.env.USER_MYSQL,
+        password: process.env.PASSWORD_MYSQL,
+        database: process.env.DATABASE_MYSQL
     }
 }
