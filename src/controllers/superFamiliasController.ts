@@ -8,6 +8,11 @@ class SuperFamiliaController{
 
         (await pool).query('SELECT * FROM mst_super_familia where activo = '+ (await pool).escape('S'), function (error: any, results: JSON, fields: any) {
             if (error) throw error;
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Max-Age", "1800");
+            res.setHeader("Access-Control-Allow-Headers", "content-type");
+            res.setHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
             res.json(results);
         });
     }
@@ -19,7 +24,7 @@ class SuperFamiliaController{
         var sql = 'SELECT * FROM mst_super_familia WHERE idt_super_familia = ' + (await pool).escape(id);
         (await pool).query(sql, function (error: any, results: string[], fields: any) {
             if (error) throw error;
-            if(results.length > 0){
+            if(results.length > 0){                
                 return res.json(results[0]);
             }
             res.status(404).json({text: "la super familia no existe"});
