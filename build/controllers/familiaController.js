@@ -24,15 +24,35 @@ class FamiliaController {
             });
         });
     }
+    getOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            var sql = 'SELECT * FROM mst_fam_servicios WHERE fs_codfamilia = ' + (yield database_1.default).escape(id) + ' and activo = ' + (yield database_1.default).escape('S');
+            (yield database_1.default).query(sql, function (error, results, fields) {
+                if (error)
+                    throw error;
+                if (results.length > 0) {
+                    return res.json(results[0]);
+                }
+                res.status(404).json({ text: "la familia no existe" });
+            });
+        });
+    }
     listFamiliasBySuper(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            var sql = 'SELECT f.* FROM mst_fam_servicios f inner join mst_familias_superfamilias on fs_codfamilia = id_familia WHERE id_super_familia = ' + (yield database_1.default).escape(id);
+            var sql = 'SELECT f.* FROM mst_fam_servicios f inner join mst_familias_superfamilias on fs_codfamilia = id_familia WHERE activo = ' + (yield database_1.default).escape('S') + ' and id_super_familia = ' + (yield database_1.default).escape(id);
             (yield database_1.default).query(sql, function (error, results, fields) {
                 if (error)
                     throw error;
                 res.json(results);
             });
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            (yield database_1.default).query('UPDATE mst_fam_servicios set ? where fs_codfamilia = ?', [req.body, req.params.id]);
+            res.json({ text: 'Familia actualizada: ' + req.params.id });
         });
     }
 }

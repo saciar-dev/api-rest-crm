@@ -17,6 +17,21 @@ class ServiciosController{
         const { id } = req.params;
 
         var sql = 'SELECT * FROM mst_servicios inner join mst_servicios_idioma on se_codservicio = si_codservicio WHERE se_codservicio = ' + (await pool).escape(id);
+        (await pool).query(sql, function (error: any, results: string[], fields: any) {
+            if (error) throw error;
+            if(results.length > 0){
+                return res.json(results[0]);
+            }
+            res.status(404).json({text: "la super familia no existe"});
+          });
+
+    }
+
+    public async listServicioByFamilia (req: Request, res: Response){
+
+        const { id } = req.params;
+
+        var sql = 'SELECT f.*, si_descripcion FROM mst_servicios f inner join mst_servicios_idioma on se_codservicio = si_codservicio WHERE se_activo = '+ (await pool).escape('S') +' and se_familia = ' + (await pool).escape(id);
         (await pool).query(sql, function (error: any, results: JSON, fields: any) {
             if (error) throw error;
             res.json(results);

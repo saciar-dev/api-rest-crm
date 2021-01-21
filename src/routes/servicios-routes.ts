@@ -15,6 +15,7 @@ class ServiciosRoutes {
         this.router.post('/', serviciosController.create);
         this.router.put('/:id',serviciosController.update);
         this.router.delete('/:id',serviciosController.delete);
+        this.router.get('/familia/:id', serviciosController.listServicioByFamilia);
     }
 }
 

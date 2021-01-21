@@ -31,6 +31,20 @@ class ServiciosController {
             (yield database_1.default).query(sql, function (error, results, fields) {
                 if (error)
                     throw error;
+                if (results.length > 0) {
+                    return res.json(results[0]);
+                }
+                res.status(404).json({ text: "la super familia no existe" });
+            });
+        });
+    }
+    listServicioByFamilia(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            var sql = 'SELECT f.*, si_descripcion FROM mst_servicios f inner join mst_servicios_idioma on se_codservicio = si_codservicio WHERE se_activo = ' + (yield database_1.default).escape('S') + ' and se_familia = ' + (yield database_1.default).escape(id);
+            (yield database_1.default).query(sql, function (error, results, fields) {
+                if (error)
+                    throw error;
                 res.json(results);
             });
         });

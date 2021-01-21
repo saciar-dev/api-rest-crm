@@ -1,10 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 exports.default = {
     database: {
-        host: 'crm.congressrental.com',
-        user: 'root',
-        password: 'R55Gt9Bf',
-        database: 'crm'
+        host: process.env.HOST_MYSQL,
+        user: process.env.USER_MYSQL,
+        password: process.env.PASSWORD_MYSQL,
+        database: process.env.DATABASE_MYSQL
     }
 };

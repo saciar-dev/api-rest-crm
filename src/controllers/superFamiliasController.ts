@@ -17,9 +17,12 @@ class SuperFamiliaController{
         const { id } = req.params;
 
         var sql = 'SELECT * FROM mst_super_familia WHERE idt_super_familia = ' + (await pool).escape(id);
-        (await pool).query(sql, function (error: any, results: JSON, fields: any) {
+        (await pool).query(sql, function (error: any, results: string[], fields: any) {
             if (error) throw error;
-            res.json(results);
+            if(results.length > 0){
+                return res.json(results[0]);
+            }
+            res.status(404).json({text: "la super familia no existe"});
           });
 
     }

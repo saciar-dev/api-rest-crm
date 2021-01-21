@@ -9,7 +9,9 @@ class FamiliasRoutes {
     }
     config() {
         this.router.get('/', familiaController_1.familiaController.listFamilias);
-        this.router.get('/:id', familiaController_1.familiaController.listFamiliasBySuper);
+        this.router.get('/superfamilia/:id', familiaController_1.familiaController.listFamiliasBySuper);
+        this.router.put('/:id', familiaController_1.familiaController.update);
+        this.router.get('/:id', familiaController_1.familiaController.getOne);
     }
 }
 const familiasroutes = new FamiliasRoutes();

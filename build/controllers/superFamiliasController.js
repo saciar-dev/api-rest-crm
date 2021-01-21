@@ -31,7 +31,10 @@ class SuperFamiliaController {
             (yield database_1.default).query(sql, function (error, results, fields) {
                 if (error)
                     throw error;
-                res.json(results);
+                if (results.length > 0) {
+                    return res.json(results[0]);
+                }
+                res.status(404).json({ text: "la super familia no existe" });
             });
         });
     }

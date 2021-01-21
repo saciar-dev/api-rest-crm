@@ -13,6 +13,7 @@ class ServiciosRoutes {
         this.router.post('/', serviciosController_1.serviciosController.create);
         this.router.put('/:id', serviciosController_1.serviciosController.update);
         this.router.delete('/:id', serviciosController_1.serviciosController.delete);
+        this.router.get('/familia/:id', serviciosController_1.serviciosController.listServicioByFamilia);
     }
 }
 const serviciosroutes = new ServiciosRoutes();

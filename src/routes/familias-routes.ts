@@ -12,7 +12,9 @@ class FamiliasRoutes {
     config(){
         
         this.router.get('/', familiaController.listFamilias);
-        this.router.get('/:id', familiaController.listFamiliasBySuper);
+        this.router.get('/superfamilia/:id', familiaController.listFamiliasBySuper);
+        this.router.put('/:id', familiaController.update);
+        this.router.get('/:id', familiaController.getOne);
     }
 }
 
